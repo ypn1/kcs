@@ -11,3 +11,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.nav-link a {
+  text-decoration: none;
+  color:rgba(0, 0, 0, 0.87)
+}
+
+.page-title {
+  padding:15px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3)
+}
+
+.page-title-text{
+  color: rgba(0,0,0,0.75)
+}
+
+.full-width-table, .full-width-table td, .full-width-table th {
+  border: 1px solid #ddd;
+  border-left: 0;
+  font-size: 0.8rem;
+}
+
+.full-width-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+
+.full-width-table tbody td {
+  height: 50px;
+  text-align: center;
+}
+
+ul.paging{
+  margin: 0;
+  padding: 0;
+  padding: 5px 0;
+}
+
+ul.paging li{
+  display: inline-block;
+}
+
+ul.paging li .paging-button{
+  font-size: 0.9rem;
+  min-width: 40px;
+  font-weight: bold;
+}
+
+ul.paging li .paging-button.active{
+  background: #9c27b0;
+  color: #fff
+}
+
+.page-content{
+  background: #fff;
+}
+
+.padding15{
+    padding:1rem
+}
