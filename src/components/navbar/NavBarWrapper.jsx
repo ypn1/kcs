@@ -36,11 +36,12 @@ const styles = theme => ({
 
 class NavBarWrapper extends React.Component{
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       mobileOpen:false,
-      setMobileOpen:false
+      setMobileOpen:false,
+      toggleSideBar:false
     }
 
   }
@@ -49,13 +50,13 @@ class NavBarWrapper extends React.Component{
   render(){
     const  {classes} = this.props
     return(
-      <Hidden xsDown implementation="css">
       <Drawer
         className={classes.drawer}
-        variant="permanent"
+        variant="persistent"
         classes={{
           paper: classes.drawerPaper,
         }}
+        open={this.props.toggleSideBar}
         anchor="left"
       >
         <div className={classes.toolbar} >
@@ -77,7 +78,6 @@ class NavBarWrapper extends React.Component{
           </NavLink>
         </List>
       </Drawer>
-      </Hidden>
     )
   }
 }

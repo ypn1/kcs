@@ -15,7 +15,7 @@ class InChungChi extends React.Component{
     return(
       <div>
         <div className='page-title'>
-          <div className={classes.toolbar}/>
+          <div className={classes.toolbar} style={{minHeight:50}}/>
           <Typography className='page-title-text' variant="h6" gutterBottom>
             In chứng chỉ
           </Typography>

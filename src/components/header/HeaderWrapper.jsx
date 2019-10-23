@@ -2,6 +2,7 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import clsx from 'clsx';
 
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
@@ -26,11 +27,22 @@ const drawerWidth = 240;
 const styles = theme =>({
   appBar: {
     //background:'rgba(255,255,255)',
-    boxShadow:'none',
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
     marginLeft: drawerWidth,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     }
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    })
   },
   grow: {
     flexGrow: 1,
@@ -113,7 +125,6 @@ class HeaderWrapper extends React.Component{
     this.setState({
       setAnchorEl:event.currentTarget
     })
-
   };
 
   handleMobileMenuClose () {
@@ -139,6 +150,10 @@ class HeaderWrapper extends React.Component{
     this.handleMobileMenuClose();
   };
 
+  toggleNavBar(){
+    this.props.toggleShowSideBar()
+  }
+
   render(){
     const {anchorEl,mobileMoreAnchorEl} = this.state;
     const isMenuOpen = Boolean(anchorEl);
@@ -146,27 +161,30 @@ class HeaderWrapper extends React.Component{
     const {classes} = this.props;
 
     return(
-      <AppBar  position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Hidden smUp  implementation="css">
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+      <AppBar  position="fixed" className={clsx({
+          [classes.appBarShift]: this.props.toggleSideBar,
+        })}>
+        <Toolbar className='header-toolbar'>
+          <IconButton onClick={this.toggleNavBar.bind(this)} className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          {
+            /*
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+            */
+          }
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -202,8 +220,6 @@ class HeaderWrapper extends React.Component{
             </IconButton>
           </div>
         </Toolbar>
-
-
       </AppBar>
     )
   }

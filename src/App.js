@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,15 +23,13 @@ import NavBar from './components/navbar/NavBarWrapper'
 const themez = createMuiTheme({
   palette: {
     primary: purple
-
   },
   status: {
     danger: 'orange',
   },
 });
 
-
-const useStyles = makeStyles(theme => ({
+const styles = theme=>({
   root: {
     display: 'flex',
   },
@@ -45,41 +44,56 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-}));
-
-function App(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+})
 
 
-  return (
+class App extends React.Component {
 
-    <MuiThemeProvider theme={themez}>
-      <ThemeContext.Provider>
-        <Router>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Header/>
-          <NavBar/>
-          <Content/>
-        </div>
-        </Router>
-      </ThemeContext.Provider>
-    </MuiThemeProvider>
-  );
+  constructor(){
+    super()
+    this.state = {
+      showSideBar:true
+    }
+  }
+
+  toggleLeftSideBar(){
+    this.setState({
+      showSideBar:!this.state.showSideBar
+    })
+  }
+
+  render(){
+    const {classes} = this.props;
+    return (
+      <MuiThemeProvider theme={themez}>
+        <ThemeContext.Provider>
+          <Router>
+          <div className={classes.root}>
+            <CssBaseline />
+            <Header toggleSideBar ={this.state.showSideBar} toggleShowSideBar = {this.toggleLeftSideBar.bind(this)}/>
+            <NavBar toggleSideBar = {this.state.showSideBar} />
+            <Content toggleSideBar = {this.state.showSideBar}/>
+          </div>
+          </Router>
+        </ThemeContext.Provider>
+      </MuiThemeProvider>
+    );
+  }
 }
 
-App.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
-};
+// App.propTypes = {
+//   /**
+//    * Injected by the documentation to work in an iframe.
+//    * You won't need it on your project.
+//    */
+//   container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
+// };
 
-export default App;
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(App)
+
+//export default App;

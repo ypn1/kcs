@@ -9,9 +9,23 @@ import Drawer from '@material-ui/core/Drawer';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Slide from '@material-ui/core/Slide';
+
+import KhaiBaoLoPhoiMoi from './KhaiBaoLoPhoiMoi'
+
 import PhanTrang from './PhanTrang'
 
 import {dl_tong_hop_phoi} from '../../../../fake_data/dl_tong_hop_phoi'
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
 
 export default class BangTongHop extends React.Component{
 
@@ -19,11 +33,13 @@ export default class BangTongHop extends React.Component{
     super()
     this.state = {
       drawerState:false,
+      openDialog:false,
+
       showNsx:true,
       showCaSxKCS:true,
       showCaSX:true,
-      showMaPhoi:true,
-      showLoNau:true,
+      showMaPhoi:false,
+      showLoNau:false,
       showSoThanhRaBai:true,
       showBaremRaBai:true,
       showSoThanhCan:true,
@@ -31,10 +47,10 @@ export default class BangTongHop extends React.Component{
       showDontrong:true,
       showTphh:true,
       showMacThep:true,
-      showScLuyen:true,
-      showScCan:true,
-      showSEV:true,
-      showMnPSi:true
+      showScLuyen:false,
+      showScCan:false,
+      showSEV:false,
+      showMnPSi:false
     }
   }
 
@@ -50,6 +66,17 @@ export default class BangTongHop extends React.Component{
     })
   }
 
+  openDialog(){
+    this.setState({
+      openDialog:true
+    })
+  }
+
+  closeDialog(){
+    this.setState({
+      openDialog:false
+    })
+  }
 
   render(){
     return(
@@ -62,222 +89,237 @@ export default class BangTongHop extends React.Component{
           </div>
           <div>
             <Tooltip title='Tùy chọn hiển thị' placement="top"><IconButton onClick={this.handleDrawerToggle.bind(this)}><Visibility/></IconButton></Tooltip>
-            <Tooltip title='Khai báo lô mới' placement="top"><IconButton><Add/></IconButton></Tooltip>
+            <Tooltip title='Khai báo lô mới' placement="top"><IconButton onClick={this.openDialog.bind(this)} ><Add/></IconButton></Tooltip>
           </div>
         </div>
-        <table className='full-width-table'>
-          <thead>
-            <tr>
-              <th rowspan="2">STT</th>
-              {
-                this.state.showNsx && <th rowspan="2">Ngày SX</th>
-              }
-              {
-                this.state.showCaSxKCS && <th rowspan="2">Ca SX KCS</th>
-              }
-              {
-                this.state.showCaSX && <th rowspan="2">Ca SX</th>
-              }
-              {
-                this.state.showMaPhoi && <th rowspan="2">Mã Phôi</th>
-              }
-              {
-                this.state.showLoNau && <th rowspan="2">Lò nấu</th>
-              }
-              <th rowspan="2">Số lô</th>
-              {
-                (this.state.showSoThanhRaBai || this.state.showBaremRaBai) && (
-                  <th colspan={this.state.showSoThanhRaBai &&  this.state.showBaremRaBai ? "2" : "1"}>Phôi ra bãi</th>
-                )
-              }
-              {
-                (this.state.showSoThanhCan || this.state.showBaremCan) && (
-                  <th colspan={this.state.showSoThanhCan &&  this.state.showBaremCan ? "2" : "1"}>Phôi chuyển cán</th>
-                )
-              }
-              {
-                this.state.showDontrong&&  <th rowspan="2">Đơn<br/> trọng</th>
-              }
-              {
-                this.state.showTphh&&<th colspan="10">Thành phần hóa (%)</th>
-              }
-              {
-                this.state.showMacThep&&<th rowspan="2">Mác<br/> thép</th>
-              }
-              {
-                (this.state.showScLuyen || this.state.showScCan) && (
-                  <th colspan={this.state.showScCan && this.state.showScLuyen ? "2" : "1"}>Sự cố <br/> sản xuất</th>
-                )
-              }
-              {
-                this.state.showSEV && <th rowspan="2">SEV</th>
-              }
-              {
-                this.state.showMnPSi && <th rowspan="2">Mn/Si</th>
-              }
-            </tr>
-            <tr>
-              {
-                this.state.showSoThanhRaBai && <th>Số thanh</th>
-              }
-              {
-                this.state.showBaremRaBai &&  <th>Khối lượng <br/> phôi ba zem</th>
-              }
-              {
-                this.state.showSoThanhCan && <th>Số thanh</th>
-              }
-              {
-                this.state.showBaremCan && <th>Khối lượng <br/> phôi ba zem</th>
-              }
-              {
-                this.state.showTphh && (
-                  <th>C</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>Si</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                <th>Mn</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>P</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>S</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>Cr</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>Mo</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                <th>Ni</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>Cu</th>
-                )
-              }
-              {
-                this.state.showTphh && (
-                  <th>V</th>
-                )
-              }
-              {
-                this.state.showScLuyen && <th>Nguyên nhân<br/> luyện</th>
-              }
-              {
-                this.state.showScCan && <th>Nguyên nhân<br/> cán</th>
-              }
 
-            </tr>
-          </thead>
-          <tbody>
-          {
-            dl_tong_hop_phoi.map((node,key)=>{
-              return(
-                <tr>
-                  <td>{node.stt}</td>
-                  {
-                    this.state.showNsx &&   <td>{node.nsx}</td>
-                  }
-                  {
-                    this.state.showCaSxKCS  &&   <td>{node.ca_sx_kcs}</td>
-                  }
-                  {
-                    this.state.showCaSX && <td>{node.ca_sx}</td>
-                  }
-                  {
-                    this.state.showMaPhoi && <td>{node.ma_phoi}</td>
-                  }
-                  {
-                    this.state.showLoNau &&   <td>{node.lo_nau}</td>
-                  }
-                  <td>{node.so_lo}</td>
-                  {
-                    this.state.showSoThanhRaBai &&   <td>{node.prb_so_thanh}</td>
-                  }
-                  {
-                    this.state.showBaremRaBai && <td>{node.prb_kl_phoi_ba_rem}</td>
-                  }
-                  {
-                    this.state.showSoThanhCan && <td>{node.pc_so_thanh}</td>
-                  }
-                  {
-                    this.state.showBaremCan &&   <td>{node.pc_kl_phoi_ba_rem}</td>
-                  }
-                  {
-                    this.state.showDontrong && <td>{node.don_trong}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_C}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Si}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Mn}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_P}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_S}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Cr}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Mo}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Ni}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_Cu}</td>
-                  }
-                  {
-                    this.state.showTphh && <td>{node.tp_V}</td>
-                  }
-                  {
-                    this.state.showMacThep && <td>{node.mac_thep}</td>
-                  }
-                  {
-                    this.state.showScLuyen &&  <td>{node.scsx_nn_luyen}</td>
-                  }
-                  {
-                    this.state.showScCan && <td>{node.scsx_nn_can}</td>
-                  }
-                  {
-                    this.state.showSEV && <td>{node.cev}</td>
-                  }
+          <Dialog className='custom-dialog' maxWidth="xl" open={this.state.openDialog} TransitionComponent={Transition}>
+            <DialogTitle style={{display:'inline-flex'}}>
+              <span style={{flex:1}} variant="h6" gutterBottom>Khai báo lôi phôi mới</span>
+              <IconButton onClick={this.closeDialog.bind(this)}>
+                <CloseIcon/>
+              </IconButton>
+            </DialogTitle>
+            <KhaiBaoLoPhoiMoi/>
+          </Dialog>
+        {
 
-                  {
-                    this.state.showMnPSi && <td>{node.mn_p_si}</td>
-                  }
+          <table className='full-width-table'>
+            <thead>
+              <tr>
+                <th rowspan="2">STT</th>
+                {
+                  this.state.showNsx && <th rowspan="2">Ngày SX</th>
+                }
+                {
+                  this.state.showCaSxKCS && <th rowspan="2">Ca SX KCS</th>
+                }
+                {
+                  this.state.showCaSX && <th rowspan="2">Ca SX</th>
+                }
+                {
+                  this.state.showMaPhoi && <th rowspan="2">Mã Phôi</th>
+                }
+                {
+                  this.state.showLoNau && <th rowspan="2">Lò nấu</th>
+                }
+                <th rowspan="2">Số lô</th>
+                {
+                  (this.state.showSoThanhRaBai || this.state.showBaremRaBai) && (
+                    <th colspan={this.state.showSoThanhRaBai &&  this.state.showBaremRaBai ? "2" : "1"}>Phôi ra bãi</th>
+                  )
+                }
+                {
+                  (this.state.showSoThanhCan || this.state.showBaremCan) && (
+                    <th colspan={this.state.showSoThanhCan &&  this.state.showBaremCan ? "2" : "1"}>Phôi chuyển cán</th>
+                  )
+                }
+                {
+                  this.state.showDontrong&&  <th rowspan="2">Đơn<br/> trọng</th>
+                }
+                {
+                  this.state.showTphh&&<th colspan="10">Thành phần hóa (%)</th>
+                }
+                {
+                  this.state.showMacThep&&<th rowspan="2">Mác<br/> thép</th>
+                }
+                {
+                  (this.state.showScLuyen || this.state.showScCan) && (
+                    <th colspan={this.state.showScCan && this.state.showScLuyen ? "2" : "1"}>Sự cố <br/> sản xuất</th>
+                  )
+                }
+                {
+                  this.state.showSEV && <th rowspan="2">SEV</th>
+                }
+                {
+                  this.state.showMnPSi && <th rowspan="2">Mn/Si</th>
+                }
+              </tr>
+              <tr>
+                {
+                  this.state.showSoThanhRaBai && <th>Số thanh</th>
+                }
+                {
+                  this.state.showBaremRaBai &&  <th>Khối lượng <br/> phôi ba zem</th>
+                }
+                {
+                  this.state.showSoThanhCan && <th>Số thanh</th>
+                }
+                {
+                  this.state.showBaremCan && <th>Khối lượng <br/> phôi ba zem</th>
+                }
+                {
+                  this.state.showTphh && (
+                    <th>C</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>Si</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                  <th>Mn</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>P</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>S</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>Cr</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>Mo</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                  <th>Ni</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>Cu</th>
+                  )
+                }
+                {
+                  this.state.showTphh && (
+                    <th>V</th>
+                  )
+                }
+                {
+                  this.state.showScLuyen && <th>Nguyên nhân<br/> luyện</th>
+                }
+                {
+                  this.state.showScCan && <th>Nguyên nhân<br/> cán</th>
+                }
 
-                </tr>
-              )
-            })
-          }
-          </tbody>
-        </table>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              dl_tong_hop_phoi.map((node,key)=>{
+                return(
+                  <tr>
+                    <td>{node.stt}</td>
+                    {
+                      this.state.showNsx &&   <td>{node.nsx}</td>
+                    }
+                    {
+                      this.state.showCaSxKCS  &&   <td>{node.ca_sx_kcs}</td>
+                    }
+                    {
+                      this.state.showCaSX && <td>{node.ca_sx}</td>
+                    }
+                    {
+                      this.state.showMaPhoi && <td>{node.ma_phoi}</td>
+                    }
+                    {
+                      this.state.showLoNau &&   <td>{node.lo_nau}</td>
+                    }
+                    <td>{node.so_lo}</td>
+                    {
+                      this.state.showSoThanhRaBai &&   <td>{node.prb_so_thanh}</td>
+                    }
+                    {
+                      this.state.showBaremRaBai && <td>{node.prb_kl_phoi_ba_rem}</td>
+                    }
+                    {
+                      this.state.showSoThanhCan && <td>{node.pc_so_thanh}</td>
+                    }
+                    {
+                      this.state.showBaremCan &&   <td>{node.pc_kl_phoi_ba_rem}</td>
+                    }
+                    {
+                      this.state.showDontrong && <td>{node.don_trong}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_C}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Si}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Mn}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_P}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_S}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Cr}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Mo}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Ni}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_Cu}</td>
+                    }
+                    {
+                      this.state.showTphh && <td>{node.tp_V}</td>
+                    }
+                    {
+                      this.state.showMacThep && <td>{node.mac_thep}</td>
+                    }
+                    {
+                      this.state.showScLuyen &&  <td>{node.scsx_nn_luyen}</td>
+                    }
+                    {
+                      this.state.showScCan && <td>{node.scsx_nn_can}</td>
+                    }
+                    {
+                      this.state.showSEV && <td>{node.cev}</td>
+                    }
+
+                    {
+                      this.state.showMnPSi && <td>{node.mn_p_si}</td>
+                    }
+
+                  </tr>
+                )
+              })
+            }
+            </tbody>
+          </table>
+
+        }
+
         <Drawer anchor="right" open={this.state.drawerState} onClose={this.handleDrawerToggle.bind(this)}>
           <div  style={{width:300,padding:15}}>
             <FormControlLabel
@@ -448,7 +490,12 @@ export default class BangTongHop extends React.Component{
           </div>
 
         </Drawer>
-        <PhanTrang/>
+        {
+
+          <PhanTrang/>
+
+        }
+
       </div>
 
     )

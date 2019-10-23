@@ -18,12 +18,12 @@ code {
 }
 
 .page-title {
-  padding:15px;
+  padding-left: 15px;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.3)
 }
 
 .page-title-text{
-  color: rgba(0,0,0,0.75)
+  color: rgba(0,0,0,0.75);margin-bottom: 0!important;
 }
 
 .full-width-table, .full-width-table td, .full-width-table th {
@@ -37,11 +37,36 @@ code {
   border-collapse: collapse;
 }
 
-
-
-.full-width-table tbody td {
+.full-width-table th, tbody td {
   height: 50px;
   text-align: center;
+}
+
+
+
+.none-min-height{
+  min-height: 50px!important;
+}
+@media (min-width: 600px){
+  .header-toolbar{
+    min-height: 0!important;
+  }
+}
+.MuiPaper-elevation4{
+  box-shadow: none!important
+}
+
+
+.tbl-nhap-tphh, .tbl-nhap-tphh td, .tbl-nhap-tphh th{
+  border:1px solid #ddd
+}
+
+.tbl-nhap-tphh{
+  width: 100%;
+  border-collapse: collapse;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
 }
 
 ul.paging{
@@ -71,4 +96,12 @@ ul.paging li .paging-button.active{
 
 .padding15{
     padding:1rem
+}
+
+.custom-dialog .MuiDialog-paper{
+  height: 100vh!important;
+  border-radius: 0;
+}
+.custom-dialog .MuiDialog-paperScrollPaper{
+  max-height: none;
 }
