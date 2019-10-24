@@ -23,9 +23,9 @@ class KhaiBaoLoPhoiMoi extends React.Component{
     const {classes} = this.props
 
     return(
-      <DialogContent dividers>   
+      <DialogContent dividers>
         <Grid container spacing={2}>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <Paper style={{minHeight:400}}>
               <Toolbar style={{background:'#f1f1f1',minHeight:48}}>
                 <Typography color="inherit" variant="subtitle1">
@@ -34,11 +34,17 @@ class KhaiBaoLoPhoiMoi extends React.Component{
               </Toolbar>
               <div style={{padding:15}}>
                 <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      className={classes.marginRight}
+                      label="Ngày SX"
+                      value="22/20/2019"
+                    />
+                  </Grid>
                   <Grid item xs={6} >
                     <TextField
                       className={classes.marginRight}
                       label="Số lô"
-                      margin="normal"
                       defaultValue="5122"
                       type='number'
                     />
@@ -46,16 +52,7 @@ class KhaiBaoLoPhoiMoi extends React.Component{
                   <Grid item xs={6}>
                     <TextField
                       className={classes.marginRight}
-                      label="Ngày SX"
-                      value="22/20/2019"
-                      margin="normal"
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      className={classes.marginRight}
                       label="Ca SX KCS"
-                      margin="normal"
                     />
                   </Grid>
 
@@ -63,7 +60,6 @@ class KhaiBaoLoPhoiMoi extends React.Component{
                     <TextField
                       className={classes.marginRight}
                       label="Ca SX"
-                      margin="normal"
                     />
                   </Grid>
 
@@ -71,14 +67,32 @@ class KhaiBaoLoPhoiMoi extends React.Component{
                     <TextField
                       className={classes.marginRight}
                       label="Mã phôi"
-                      margin="normal"
                     />
                   </Grid>
 
                   <Grid item xs={6}>
                     <TextField
                       label="Lò nấu"
-                      margin="normal"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Đơn trọng"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Mác thép"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="SEV"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Mn/Si"                    
                     />
                   </Grid>
                 </Grid>
@@ -86,7 +100,7 @@ class KhaiBaoLoPhoiMoi extends React.Component{
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={8}>
             <KhaiBaoThanhPhanHoaHoc/>
           </Grid>
         </Grid>

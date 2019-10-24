@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import Slide from '@material-ui/core/Slide';
 
 import KhaiBaoLoPhoiMoi from './KhaiBaoLoPhoiMoi'
+import DialogActions from '@material-ui/core/DialogActions';
 
 import PhanTrang from './PhanTrang'
 
@@ -101,6 +102,11 @@ export default class BangTongHop extends React.Component{
               </IconButton>
             </DialogTitle>
             <KhaiBaoLoPhoiMoi/>
+            <DialogActions>
+              <Button variant='contained' color="primary">
+                Lưu
+              </Button>
+            </DialogActions>
           </Dialog>
         {
 

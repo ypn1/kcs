@@ -16,6 +16,7 @@ import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
+
 import _  from 'lodash'
 
 const styles = theme => ({
@@ -33,7 +34,9 @@ const styles = theme => ({
     padding:'0px!important'
   },
   input:{
-    width:50
+    width:50,
+    outline:'none',
+    border:'1px dashed #ddd'
   }
 });
 
@@ -58,7 +61,8 @@ class KhaiBaoThanhPhanHoaHoc extends React.Component {
     context = this
     this.state = ({
       danhsachbanthu:[],
-      selected:[]
+      selected:[],
+      thanhpham:null
     })
   }
 
@@ -138,6 +142,12 @@ class KhaiBaoThanhPhanHoaHoc extends React.Component {
     return (this.state.selected).length!=0 && (this.state.selected).length == (this.state.danhsachbanthu).length
   }
 
+  chonThanhPham(itemId){
+    this.setState({
+      thanhpham:itemId
+    })
+  }
+
   render(){
     const {classes} = this.props;
     return (
@@ -151,11 +161,15 @@ class KhaiBaoThanhPhanHoaHoc extends React.Component {
               <span style={{fontWeight:500}}>{(this.state.selected).length} dòng đã chọn</span>
             )
           }
-          <Tooltip title="Delete">
-            <IconButton onClick={this.removeRow.bind(this)} aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+          {
+            this.state.selected.length > 0 && (
+              <Tooltip title="Delete">
+                <IconButton onClick={this.removeRow.bind(this)} aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            )
+          }
           <Tooltip title="Thêm dòng mới">
             <IconButton onClick={this.addRow.bind(this)}>
               <AddIcon />
@@ -186,7 +200,7 @@ class KhaiBaoThanhPhanHoaHoc extends React.Component {
                   <td component="th" scope="row">
                     <Checkbox checked={(context.state.selected).indexOf(row.id) != -1} onChange={context.checkMe.bind(context,row.id)} />
                   </td>
-                  <td>Mẫu {key+1}</td>
+                  <td>{context.state.thanhpham == row.id ?<span style={{fontWeight:'bold'}}>T/phẩm</span> :'Mẫu' + (key+1)}</td>
                   <td><input className={classes.input} type='text' /></td>
                   <td><input className={classes.input} type='text' /></td>
                   <td><input className={classes.input} type='text' /></td>
@@ -196,7 +210,7 @@ class KhaiBaoThanhPhanHoaHoc extends React.Component {
                   <td><input className={classes.input} type='text' /></td>
                   <td><input className={classes.input} type='text' /></td>
                   <td><input className={classes.input} type='text' /></td>
-                  <td><Radio/></td>
+                  <td><Radio checked={context.state.thanhpham == row.id} onChange={context.chonThanhPham.bind(context,row.id)}/></td>
                 </tr>
               )
             }

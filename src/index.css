@@ -1,3 +1,5 @@
+@page { size: auto;  margin: 0mm; }
+@import url('https://fonts.googleapis.com/css?family=Romanesco&display=swap');
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -23,6 +25,9 @@ code {
 }
 
 .page-title-text{
+  font-size: 16px!important;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: rgba(0,0,0,0.75);margin-bottom: 0!important;
 }
 
@@ -43,7 +48,6 @@ code {
 }
 
 
-
 .none-min-height{
   min-height: 50px!important;
 }
@@ -61,16 +65,34 @@ code {
   border:1px solid #ddd
 }
 
+
+.tbl-nhap-tphh tr td:first-child{
+  border-left: 0
+}
+
+.tbl-nhap-tphh tr th:first-child{
+  border-left: 0
+}
+
+
+.tbl-nhap-tphh tr th:last-child{
+  border-right: 0
+}
+
+.tbl-nhap-tphh tr td:last-child{
+  border-right: 0
+}
+
 .tbl-nhap-tphh{
   width: 100%;
   border-collapse: collapse;
   border-left: 0;
   border-right: 0;
-  border-top: 0;
 }
 
 ul.paging{
   margin: 0;
+  margin-top: 15px;
   padding: 0;
   padding: 5px 0;
 }
@@ -104,4 +126,49 @@ ul.paging li .paging-button.active{
 }
 .custom-dialog .MuiDialog-paperScrollPaper{
   max-height: none;
+}
+
+/*FIle in chung chi */
+table.tbl-in-ttc td{
+  height: 20px;
+  text-align: left;
+}
+
+table.tbl-in-ttc tr td:nth-child(2){
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+table.tlb-incc-solieu, table.tlb-incc-solieu td, table.tlb-incc-solieu th{
+  border:1px solid #000
+}
+
+table.tlb-incc-solieu td{
+  height: 15px;
+  padding: 1px;
+}
+
+table.tlb-incc-solieu{
+  color:'#000';
+  font-family: 'Times New Roman';
+  border-collapse: collapse;
+}
+
+.ket-luan{
+  padding: 15px;
+  font-family: 'Times New Roman';
+  line-height: 0.6;
+}
+
+/*Chi tiết hợp đồng */
+table.collapse-table, table.collapse-table td, table.collapse-table th{
+  border:1px solid #000
+}
+table.collapse-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tbl-height-row-40 th,.tbl-height-row-40 td{
+  height: 30px;
 }

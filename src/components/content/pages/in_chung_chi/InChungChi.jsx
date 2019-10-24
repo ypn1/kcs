@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography';
 
+import ChungChiPhoiChoIn from './chung_chi_phoi_cho_in/ChungChiPhoiChoIn'
+
 
 const styles = theme => ({
   toolbar: theme.mixins.toolbar
@@ -14,14 +16,16 @@ class InChungChi extends React.Component{
     const {classes} = this.props
     return(
       <div>
-        <div className='page-title'>
-          <div className={classes.toolbar} style={{minHeight:50}}/>
-          <Typography className='page-title-text' variant="h6" gutterBottom>
-            In chứng chỉ
-          </Typography>
-        </div>
-        <div>
-        </div>
+          <div className='page-title'>
+            <div className={classes.toolbar} style={{minHeight:50}}/>
+            <Typography className='page-title-text' variant="h6" gutterBottom>
+              In chứng chỉ
+            </Typography>
+          </div>
+
+          <div style={{padding:15}}>
+            <ChungChiPhoiChoIn/>
+          </div>
       </div>
     )
   }
