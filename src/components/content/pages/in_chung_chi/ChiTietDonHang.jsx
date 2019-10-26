@@ -12,9 +12,16 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Tooltip from '@material-ui/core/Tooltip';
 import PrintIcon from '@material-ui/icons/Print';
 import {Link} from 'react-router-dom'
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import WarningIcon from '@material-ui/icons/Warning';
 
 const styles = theme => ({
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  snackWarning:{
+    backgroundColor:'#ffa000',
+    borderRadius:0
+  }
 })
 
 const lophoi = {
@@ -46,6 +53,18 @@ class ChiTietDonHang extends React.Component{
             Chi tiết xuất bán hợp đồng Trang Khanh
           </Typography>
         </div>
+
+        <SnackbarContent
+        className={classes.snackWarning}
+        aria-describedby="client-snackbar"
+        message={
+          <span id="client-snackbar" className={classes.message}>
+            <WarningIcon />
+            Thiếu thông tin lô phôi 5030
+          </span>
+        }
+      />
+
         <div className='page-content'>
         <div style={{display:'inline-flex',width:'100%'}}>
           <div style={{flex:1}}>

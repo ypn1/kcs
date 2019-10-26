@@ -201,7 +201,7 @@ class TrangInPhoi extends React.Component{
             <Tooltip title='Trang sau' placement="top"><IconButton><KeyboardArrowRight/></IconButton></Tooltip>
           </div>
         </div>
-        <Paper ref={el => (this.componentRef = el)} style={{boxShadow:'none',width:1080,height:690,margin:'auto',borderRadius:0,paddingTop:50}}>
+        <Paper ref={el => (this.componentRef = el)} style={{boxShadow:'none',width:1080,height:782,margin:'auto',borderRadius:0,paddingTop:50}}>
           <h2 style={{fontFamily:'Times New Roman',textAlign:'center'}}>GIẤY CHỨNG NHẬN CHẤT LƯỢNG SẢN PHẨM</h2>
           <p style={{fontFamily:'Times New Roman',textAlign:'center'}}>(Product Quality Mill Test Certificate)</p>
           <div style={{paddingLeft:50}}>

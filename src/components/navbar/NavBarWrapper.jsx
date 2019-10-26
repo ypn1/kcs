@@ -64,16 +64,16 @@ class NavBarWrapper extends React.Component{
         </div>
         <Divider />
         <List className='nav-link'>
-          <NavLink to='/tong-hop-phoi'>
+          <NavLink  activeClassName='is-active' to='/tong-hop-phoi'>
             <ListItem button>
-              <ListItemIcon><CalendarTodayIcon /></ListItemIcon>
-              <ListItemText primary="Tổng hợp phôi" />
+              <ListItemIcon className='icon'><CalendarTodayIcon /></ListItemIcon>
+              <ListItemText  primary={<span className='text'>Tổng hợp phôi</span>} />
             </ListItem>
           </NavLink>
-          <NavLink to='/in-chung-chi'>
+          <NavLink  activeClassName='is-active' to='/in-chung-chi'>
             <ListItem button>
-              <ListItemIcon><PrintIcon /></ListItemIcon>
-              <ListItemText primary="In chứng chỉ" />
+              <ListItemIcon className='icon'><PrintIcon /></ListItemIcon>
+              <ListItemText primary={<span className='text'>In chứng chỉ</span>} />
             </ListItem>
           </NavLink>
         </List>
